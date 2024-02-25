@@ -5,12 +5,12 @@ on:
     branches:
       - main
     paths:
-      - 'temp-scraper/**'  
+      - 'application-assessment-repo/**'  
   push:
     branches:
       - main
     paths:
-        - 'temp-scraper/**'   
+      - 'application-assessment-repo/**'   
 
 jobs:
   build-and-push-docker-image:
