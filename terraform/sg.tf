@@ -8,7 +8,7 @@ resource "aws_security_group" "private" {
     from_port       = 80
     to_port         = 80
     protocol        = "tcp"
-    security_groups = [aws_lb.main-elb.id]
+    security_groups = [aws_security_group.load_balanacer-sg.id]
   }
 
   egress {

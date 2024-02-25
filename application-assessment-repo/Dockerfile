@@ -1,21 +1,24 @@
-# Use the official Maven image as the build environment
-FROM maven:3.6.3-jdk-11 as builder
+# Step 1: Build the application
+FROM maven:3.6.3-jdk-11 as build
 WORKDIR /app
 
-COPY . .
+# Copy the source code
+COPY src /app/src
+# Copy the Maven configuration file
+COPY pom.xml /app
 
-# Build the application
-RUN mvn clean package
+# Package the application
+RUN mvn clean package -DskipTests
 
-# Use the official OpenJDK image for a lean production stage
+# Step 2: Create the Docker container
 FROM openjdk:11-jre-slim
 WORKDIR /app
 
-# Copy the built application from the builder stage
-COPY --from=builder /app/target/*.jar app.jar
+# Copy the packaged WAR file from the build stage to the container
+COPY --from=build /app/target/spring-petclinic-*.war /app/app.war
 
-# Expose the port the application runs on
+# Expose the port the application listens on
 EXPOSE 8080
 
 # Run the application
-CMD ["java", "-jar", "app.jar"]
+CMD ["java", "-jar", "app.war"]
