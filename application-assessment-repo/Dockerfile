@@ -15,6 +15,7 @@ FROM tomcat:9.0-jdk11-openjdk
 RUN rm -rf /usr/local/tomcat/webapps/*
 
 # Copy the WAR file from the builder stage to the Tomcat webapps directory
+# Ensure the WAR file name matches the output from the Maven build
 COPY --from=builder /app/target/spring-petclinic-*.war /usr/local/tomcat/webapps/ROOT.war
 
 # Expose the port Tomcat listens on
