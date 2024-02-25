@@ -1,14 +1,14 @@
 resource "aws_security_group" "private" {
   name        = "${var.env_code}-private"
   description = "Allow SSH inbound traffic"
-  vpc_id      = aws_vpc.cloudheight-vpc.id
+  vpc_id      = aws_vpc.cloudheight_vpc.id
 
   ingress {
     description     = "Http from load balancer"
     from_port       = 8080
     to_port         = 8080
     protocol        = "tcp"
-    security_groups = [aws_security_group.load_balanacer-sg.id]
+    security_groups = [aws_security_group.load_balancer_sg.id]
   }
 
   egress {
@@ -23,10 +23,10 @@ resource "aws_security_group" "private" {
   }
 }
 
-resource "aws_security_group" "load_balanacer-sg" {
+resource "aws_security_group" "load_balancer_sg" {
   name        = "${var.env_code}-load-balancer"
   description = "Allow HTTP to the load balanacer"
-  vpc_id      = aws_vpc.cloudheight-vpc.id
+  vpc_id      = aws_vpc.cloudheight_vpc.id
 
   ingress {
     description = "TCP FROM ANYWHERE"

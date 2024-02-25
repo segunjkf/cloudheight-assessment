@@ -7,7 +7,7 @@ variable "env_code" {
 variable "vpc_name" {
   type        = string
   description = "name of the vpc"
-  default     = "cloudheight-vpc"
+  default     = "cloudheight_vpc"
 }
 
 variable "vpc_cidr" {
