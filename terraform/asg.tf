@@ -19,6 +19,7 @@ resource "aws_launch_configuration" "main" {
   instance_type        = var.instance_type
   security_groups      = [aws_security_group.private.id]
   iam_instance_profile = aws_iam_instance_profile.main.name
+  user_data            = file("user-data.sh")
 }
 
 resource "aws_autoscaling_group" "main" {
