@@ -12,13 +12,13 @@ subnets.
 
 ## Continuous Integration
 
-Our CI is facilitated by GitHub Actions, which automates and integrates some processes in our infrastructure. For java Application, the pipeline is triggered by pushes to the master branch, it encompasses:
+We use GitHub Actions for our CI, triggered by pushes to the master branch. It handles:
 
-- *Docker Image Building:* Constructs a Docker image from the application and pushes it to DockerHub.
+Docker Image Building: Constructs a Docker image from the application and pushes it to DockerHub.
 
 ## Continuous Deployment
 
-The deployment process of our application is automated through userdata.sh. We've configured a cron job that continuously monitors Docker Hub for new image releases. This setup ensures that every minute, if there's a new version of the image available, it automatically gets deployed.
+Our deployment process is automated through `userdata.sh``. A cron job monitors Docker Hub for new image releases every minute and automatically deploys any new version found.
 
 ## How To Deploy The Infrastructure?
 
