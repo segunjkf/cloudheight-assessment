@@ -13,19 +13,19 @@ variable "vpc_name" {
 variable "vpc_cidr" {
   type        = string
   description = " vpc cidr block "
-  default     = "10.6.0.0/16"
+  default     = "10.0.0.0/16"
 }
 
 variable "private_subnets_cidr" {
   type        = list(any)
-  description = " private subnet cidr block "
-  default     = ["10.6.0.0/20", "10.6.16.0/20", "10.6.32.0/20"]
+  description = "private subnet cidr block "
+  default     = ["10.0.3.0/24", "10.0.4.0/24"]
 }
 
 variable "public_subnets_cidr" {
   type        = list(any)
-  description = " public subnet cidr block "
-  default     = ["10.6.48.0/20", "10.6.64.0/20", "10.6.80.0/20"]
+  description = "public subnet cidr block "
+  default     = ["10.0.1.0/24", "10.0.2.0/24"]
 }
 
 variable "instance_type" {

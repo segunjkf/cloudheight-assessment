@@ -93,7 +93,7 @@ resource "aws_route_table" "public" {
 }
 
 resource "aws_route_table" "private" {
-  count = length(var.public_subnets_cidr)
+  count = length(var.private_subnets_cidr)
 
   vpc_id = aws_vpc.cloudheight_vpc.id
 

@@ -1,25 +1,18 @@
 #!/bin/bash
 
 
-# Wait for cloud-init to finish initializing the machine
-cloud-init status --wait
-
-# Setting DEBIAN_FRONTEND to ensure non-interactive operations for APT
-export DEBIAN_FRONTEND=noninteractive
 
 # update and set-up docker 
-timeout 10m bash -c 'until sudo apt -qqq --yes update && \
- sudo apt install apt-transport-https ca-certificates curl software-properties-common -y && \
- curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - && \
- sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable" -y && \
- sudo apt -qqq --yes install docker-ce; do sleep 10; \
-done'
-
+sudo apt -qqq --yes update
+sudo apt install apt-transport-https ca-certificates curl software-properties-common -y
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable" -y
+sudo apt -qqq --yes install docker-ce
 sudo usermod -aG docker ubuntu
 
 # Create the script directory and script file
 sudo mkdir --parents "/home/ubuntu/script"
-sudo cat > /home/ubuntu/script/script.bash <<EOF
+cat << EOF > "/home/ubuntu/script/script.bash"
 #!/bin/bash
 
 # Define variables
