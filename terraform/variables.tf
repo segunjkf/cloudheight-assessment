@@ -1,13 +1,13 @@
 variable "env_code" {
   type        = string
   description = "value"
-  default     = "cloudheight-vpc"
+  default     = "cloudheight"
 }
 
 variable "vpc_name" {
   type        = string
   description = "name of the vpc"
-  default     = "infra-vpc"
+  default     = "cloudheight-vpc"
 }
 
 variable "vpc_cidr" {
@@ -29,6 +29,7 @@ variable "public_subnets_cidr" {
 }
 
 variable "instance_type" {
-  type    = string
-  default = "t3.micro"
+  type        = string
+  description = "The ec2 instance type to be deployed"
+  default     = "t3.micro"
 }
