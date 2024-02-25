@@ -8,18 +8,18 @@ cloud-init status --wait
 export DEBIAN_FRONTEND=noninteractive
 
 # update and set-up docker 
-timeout 10m bash -c 'until apt-get -qqq --yes update && \
- sudo apt install apt-transport-https ca-certificates curl software-properties-common -y \
- curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - \
- sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable" -y \
- sudo apt-get -qqq --yes install docker-ce; do sleep 10; \
+timeout 10m bash -c 'until sudo apt -qqq --yes update && \
+ sudo apt install apt-transport-https ca-certificates curl software-properties-common -y && \
+ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - && \
+ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable" -y && \
+ sudo apt -qqq --yes install docker-ce; do sleep 10; \
 done'
 
 sudo usermod -aG docker ubuntu
 
 # Create the script directory and script file
-mkdir --parents "/home/ubuntu/script"
-cat > /home/ubuntu/script/script.bash <<EOF
+sudo mkdir --parents "/home/ubuntu/script"
+sudo cat > /home/ubuntu/script/script.bash <<EOF
 #!/bin/bash
 
 # Define variables
@@ -61,7 +61,9 @@ main
 EOF
 
 # Make the script executable
-chmod +x /home/ubuntu/script/script.bash
+sudo chmod +x /home/ubuntu/script/script.bash
 
 # Setup cron job to run the script every minute
-(crontab -l 2>/dev/null; echo "* * * * * /home/ubuntu/script/script.bash") | crontab -
+# for continoues
+(sudo crontab -l 2>/dev/null; echo "* * * * * /home/ubuntu/script/script.bash > /home/ubuntu/script/script_log.txt 2>&1") | sudo crontab -
+
