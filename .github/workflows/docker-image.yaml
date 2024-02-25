@@ -3,12 +3,12 @@ name: cloudheight docker images
 on:
   pull_request:
     branches:
-      - main
+      - master
     paths:
       - 'application-assessment-repo/**'  
   push:
     branches:
-      - main
+      - master
     paths:
       - 'application-assessment-repo/**'   
 
