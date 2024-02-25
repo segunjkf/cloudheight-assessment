@@ -3,7 +3,7 @@ resource "aws_lb" "main-elb" {
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.load_balanacer-sg.id]
-  subnets            = aws_subnet.private[*].id
+  subnets            = aws_subnet.public[*].id
   tags = {
     Environment = "${var.env_code}-loadbalancer-my-sg"
   }

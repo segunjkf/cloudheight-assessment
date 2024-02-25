@@ -27,18 +27,18 @@ resource "aws_launch_configuration" "main" {
 
 
 resource "aws_autoscaling_group" "main" {
-  name                      = var.env_code
-  min_size                  = 2
-  max_size                  = 5
-  desired_capacity          = 2
-  launch_configuration      = aws_launch_configuration.main.name
-  vpc_zone_identifier       = aws_subnet.private[*].id
-  target_group_arns         = [aws_lb_target_group.main.arn]
+  name                 = var.env_code
+  min_size             = 2
+  max_size             = 5
+  desired_capacity     = 2
+  launch_configuration = aws_launch_configuration.main.name
+  vpc_zone_identifier  = aws_subnet.private[*].id
+  target_group_arns    = [aws_lb_target_group.main.arn]
 
   tag {
-    key                    = "Name"
-    value                  = "${var.env_code}-asg"
-    propagate_at_launch    = true
+    key                 = "Name"
+    value               = "${var.env_code}-asg"
+    propagate_at_launch = true
   }
 
   lifecycle {
